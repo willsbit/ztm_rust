@@ -1,1 +1,1 @@
-# ztm_rust
+Curso de Rust da Zero to Mastery Academy.
