@@ -12,4 +12,15 @@
 // * Use a match expression to determine which message
 //   to print
 
-fn main() {}
+fn var_status(is_var_gt_100: bool){
+    match is_var_gt_100 {
+        true => println!("it's big"),
+        false => println!("it's small")
+    };
+}
+
+fn main() {
+    let var = 150;
+    let is_var_gt_100: bool = var > 100;
+    var_status(is_var_gt_100)
+}
