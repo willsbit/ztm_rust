@@ -9,4 +9,20 @@
 // * Destructure the return value into two variables
 // * Use an if..else if..else block to determine what to print
 
-fn main() {}
+fn cartesian_coords_generator(x: i32, y: i32) -> (i32, i32) {
+    let (x, y) = (x, y);
+    if y > 5 {
+        println!("The y-value is greater than 5");
+        (x, y)
+    } else if y == 5 {
+        println!("The y-value is 5");
+        (x, y)
+    } else {
+        println!("The y-value is greater than 5");
+        (x, y)
+    }
+}
+
+fn main() {
+    cartesian_coords_generator(5 ,6);
+}
