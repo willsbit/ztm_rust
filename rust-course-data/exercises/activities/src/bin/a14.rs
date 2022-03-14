@@ -19,14 +19,19 @@ struct KidCharacteristics {
 
 impl KidCharacteristics {
     fn print(&self){
-        println!("Name: {:?}", self.name);
-        println!("Color: {:?}", self.color);
+        if self.age < 10 {
+            println!("Name: {:?}", self.name);
+            println!("Color: {:?}", self.color);
+        } else {
+            println!("Sorry, {:?} you must be aged 10 or under to participate.", self.name)
+        }
+
     }
 }
 
 fn main() {
     let people = vec![
-        KidCharacteristics{ age: 9, name: String::from("Alice"), color: String::from("Yellow") },
+        KidCharacteristics{ age: 45, name: String::from("Alice"), color: String::from("Yellow") },
         KidCharacteristics{ age: 6, name: String::from("Bob"), color: String::from("Red") },
         KidCharacteristics{ age: 4, name: String::from("Charles"), color: String::from("Blue") },
     ];
