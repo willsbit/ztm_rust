@@ -32,6 +32,5 @@ fn main() {
 
     let purchased = can_purchase(&will);
     println!("{:?}", purchased);
-    // pick_choice(&will);
 
 }
