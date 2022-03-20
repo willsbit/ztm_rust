@@ -9,7 +9,6 @@
 //   * 2 Tables
 //   * 0 Couches
 // * Print the total number of items in stock
-//
 // Notes:
 // * Use a HashMap for the furniture store stock
 
