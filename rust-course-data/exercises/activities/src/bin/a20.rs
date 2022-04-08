@@ -23,4 +23,54 @@
 // * The program should be case-insensitive (the user should be able to type
 //   Reboot, reboot, REBOOT, etc.)
 
-fn main() {}
+use std::io;
+
+enum PowerOptions {
+    Off,
+    Sleep,
+    Reboot,
+    Shutdown,
+    Hibernate
+}
+
+
+impl PowerOptions {
+    fn new(state: &str) -> Option<PowerOptions> {
+        let sanitized_input = state.trim().to_lowercase();
+        match sanitized_input.as_str() {
+            "off" => Some(PowerOptions::Off),
+            "sleep" => Some(PowerOptions::Sleep),
+            "reboot" => Some(PowerOptions::Reboot),
+            "shutdown" => Some(PowerOptions::Shutdown),
+            "hibernate" => Some(PowerOptions::Hibernate),
+            _ => None
+        }
+    }
+}
+
+fn print_state(option: PowerOptions) {
+    use PowerOptions::*;
+    match option {
+        Off => println!("Shutting off..."),
+        Sleep => println!("Sleeping..."),
+        Reboot => println!("Rebooting..."),
+        Shutdown => println!("Shutting down..."),
+        Hibernate => println!("Hibernating...")
+    }
+}
+fn main() {
+    let mut buffer = String::new();
+    println!("Enter your desired action! Options are:");
+    println!("off, sleep, reboot, shutdown, hibernate.");
+
+    let input_status = io::stdin().read_line(&mut buffer);
+
+    if input_status.is_ok() {
+        match PowerOptions::new(&buffer) {
+            None => println!("Invalid power state"),
+            Some(state) => print_state(state)
+        }
+    } else {
+        println!("Something went wrong. Try again!");
+    }
+}
