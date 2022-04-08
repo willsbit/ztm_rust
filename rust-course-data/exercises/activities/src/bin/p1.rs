@@ -55,6 +55,15 @@ impl Bills {
     fn remove(&mut self, name: &str) -> bool {
         self.inner.remove(name).is_some()
     }
+    fn update(&mut self, name: &str, amount: f64) -> bool {
+        match self.inner.get_mut(name) {
+            Some(bill) => {
+                bill.amount = amount;
+                true
+            }
+            None => false
+        }
+    }
 }
 
 fn get_input() -> Option<String> {
@@ -93,7 +102,8 @@ fn get_bill_amount() -> Option<f64> {
 enum MainMenu {
     AddBill,
     ViewBill,
-    RemoveBill
+    RemoveBill,
+    UpdateBill
 }
 impl MainMenu {
     fn from_str(input: &str) -> Option<MainMenu> {
@@ -101,6 +111,7 @@ impl MainMenu {
             "1" => Some(MainMenu::AddBill),
             "2" => Some(MainMenu::ViewBill),
             "3" => Some(MainMenu::RemoveBill),
+            "4" => Some(MainMenu::UpdateBill),
             _ => None,
         }
     }
@@ -161,21 +172,49 @@ mod menu {
             println!("Bill not found.")
         }
     }
+
+    pub fn update_bills(bills: &mut Bills){
+        for bill in bills.get_all() {
+            println!("{:?}", bill)
+        }
+        println!("Enter bill name update: ");
+
+        let name = match get_input() {
+            Some(name) => name,
+            None => return
+        };
+
+        let amount = match get_bill_amount() {
+            Some(amount) => amount,
+            None => return
+        };
+
+        if bills.update(&name, amount) {
+            println!("Bill updated.")
+        } else {
+            println!("Bill not found.")
+        }
+    }
 }
 
 
-fn main() {
-
+fn run_program() -> Option<()> {
     let mut bills = Bills::new();
 
     loop {
         MainMenu::show_options();
-        let input = get_input().expect("No data entered");
+        let input = get_input()?; //.expect("No data entered");
         match MainMenu::from_str(input.as_str()) {
-            None => return,
+            None => break,
             Some(MainMenu::AddBill) => menu::add_bill(&mut bills),
             Some(MainMenu::ViewBill) => menu::view_bills(&bills),
-            Some(MainMenu::RemoveBill) => menu::remove_bills(&mut bills)
+            Some(MainMenu::RemoveBill) => menu::remove_bills(&mut bills),
+            Some(MainMenu::UpdateBill) => menu::update_bills(&mut bills),
         }
     }
+    None
+}
+
+fn main() {
+    run_program();
 }
