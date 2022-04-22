@@ -17,5 +17,35 @@
 
 trait Body {}
 trait Color {}
+#[derive(Debug)]
+struct Vehicle<B:Body, C:Color> {
+    body: B,
+    color: C
+}
 
-fn main() {}
+impl<B:Body, C:Color> Vehicle<B,C> {
+    pub fn new(body: B, color: C) -> Self {
+        Self { body, color }
+    }
+}
+#[derive(Debug)]
+struct Red;
+impl Color for Red {}
+#[derive(Debug)]
+struct White;
+impl Color for White {}
+
+#[derive(Debug)]
+struct Scooter;
+#[derive(Debug)]
+struct Car;
+impl Body for Scooter {}
+impl Body for Car {}
+fn main() {
+
+    let mobi = Vehicle::new(Car, White);
+    let cg = Vehicle::new(Scooter, Red);
+
+    println!("O mobi tem body {:?} e color {:?}", mobi.body, mobi.color);
+    println!("{:?}", cg);
+}
