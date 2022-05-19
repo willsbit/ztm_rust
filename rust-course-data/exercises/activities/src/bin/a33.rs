@@ -8,6 +8,15 @@
 // * No data may be copied (cannot use .to_owned() or .to_string())
 // * If both strings are the same length, the first one should be returned
 
+fn longest<'a>(str1: &'a str, str2: &'a str) -> &'a str {
+    if str2.len() > str1.len() {
+        str2
+    } else {
+        str1
+    }
+}
+
+
 fn main() {
     let short = "hello";
     let long = "this is a long message";
