@@ -32,7 +32,7 @@ enum RgbError {
     MissingHash,
     #[error("Failed to parse hex digit: {0}")]
     ParseError(std::num::ParseIntError),
-    #[error("invalid hex color lenght")]
+    #[error("invalid hex color length")]
     InvalidLength
 }
 
