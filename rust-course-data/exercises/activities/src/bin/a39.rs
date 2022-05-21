@@ -25,6 +25,7 @@ use crossbeam_channel::{unbounded, Receiver};
 use std::thread::{self, JoinHandle};
 use colored::*;
 
+
 enum LightMsg {
     // Add additional variants needed to complete the exercise
     ChangeColor(u8, u8, u8),
