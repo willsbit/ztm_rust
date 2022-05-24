@@ -19,10 +19,10 @@ enum Colors {
 
 fn color_name(color:Colors) {
     match color {
-        colors::Yellow => {println!("yellow")}
-        colors::Blue => {println!("blue")}
-        colors::Red => {println!("red")}
-        colors::Green => {println!("green")}
+        Colors::Yellow => {println!("yellow")}
+        Colors::Blue => {println!("blue")}
+        Colors::Red => {println!("red")}
+        Colors::Green => {println!("green")}
     }
 }
 
